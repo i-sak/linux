@@ -1,0 +1,15 @@
+CC	= gcc
+CFLAGS	= -Wall -Wextra
+TARGET 	= exe1 exe2
+
+all	= exe1 exe2
+
+exe1 : asia/asia.o asia/korea.o asia/japan.o
+	$(CC) -o exe1 asia/asia.o asia/korea.o asia/japan.o
+
+exe2 : eu/eu.o eu/france.o eu/germany.o
+	$(CC) -o exe2 eu/eu.o eu/france.o eu/germany.o
+
+
+clean :
+	rm -rf *.o exe* asia/*.o eu/*.o

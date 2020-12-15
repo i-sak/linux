@@ -1,0 +1,51 @@
+# 매크로를 사용한 Makefile
+# 매크로 대치를 통한 다량의 파일 지정
+# 컴파일해야할 파일이 많은 경우 일일이 목적파일명을 기술하는 것이 매우 힘듬
+#OBJECTS1 = linux_system.o linux_program.o c_program.o main1.o
+#OBJECTS2 = database.o software.o python.o main2.o
+#OBJECTS3 = java_program.o web_program.o computer.o main3.o
+
+SRCS1	= $(wildcard ./eyha/*.c)
+SRCS2	= $(wildcard ./sgkim/*.c)
+SRCS3	= $(wildcard ./sspark/*.c)
+ 
+OBJECTS1 = $(SRCS1:.c=.o)
+OBJECTS2 = $(SRCS2:.c=.o)
+OBJECTS3 = $(SRCS3:.c=.o)
+OBJECTS4 = ./eyha/linux_program.o ./eyha/c_program.o ./sspark/web_program.o \
+	./sgkim/software.o ./sgkim/python.o ./main4.o 
+
+CC	= gcc
+CFLAGS	= -Wall -Wextra
+TARGET	= cs1 cs2 cs3 cs4
+TARGET1	= cs1 
+TARGET2	= cs2
+TARGET3	= cs3
+TARGET4	= cs4
+TARGETDIR = ./eyha/*.o ./sgkim/*.o ./sspark/*.o
+
+all : $(TARGET)
+
+#
+$(TARGET1) : $(OBJECTS1)
+	$(CC) -o $@ $^
+
+#
+$(TARGET2) : $(OBJECTS2)
+	$(CC) -o $@ $^
+
+#
+$(TARGET3) : $(OBJECTS3)
+	$(CC) -o $@ $^
+
+#
+$(TARGET4) : $(OBJECTS4) 
+	$(CC) -o $@ $^
+
+
+clean :
+	$(RM) -r *.o $(TARGET) $(TARGETDIR)
+
+
+
+

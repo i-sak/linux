@@ -1,0 +1,39 @@
+# 매크로를 사용한 Makefile
+OBJECTS1 = linux_system.o linux_program.o c_program.o main1.o
+OBJECTS2 = database.o software.o python.o main2.o
+OBJECTS3 = java_program.o web_program.o computer.o main3.o
+OBJECTS4 = linux_program.o c_program.o web_program.o software.o python.o main4.o 
+
+CC	= gcc
+CFLAGS	= -Wall -Wextra
+TARGET	= cs1 cs2 cs3 cs4
+TARGET1	= cs1 
+TARGET2	= cs2
+TARGET3	= cs3
+TARGET4	= cs4
+
+all : $(TARGET)
+
+#
+$(TARGET1) : $(OBJECTS1)
+	$(CC) -o $@ $^
+
+#
+$(TARGET2) : $(OBJECTS2)
+	$(CC) -o $@ $^
+
+#
+$(TARGET3) : $(OBJECTS3)
+	$(CC) -o $@ $^
+
+#
+$(TARGET4) : $(OBJECTS4) 
+	$(CC) -o $@ $^
+
+
+clean :
+	$(RM) *.o $(TARGET)
+
+
+
+

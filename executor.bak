@@ -1,0 +1,26 @@
+#!/bin/bash
+# 컴퓨터공학전공 2017E7441 김이삭
+# 확장자에 따른 선택적 집행 쉘 스크립트, 쉘 프로그램
+# 	$# : number of arguments (인자의 수)
+#	$0 : 프로그램명
+#	$1~$9 : n번째 인자 
+
+
+if [ $# -eq 0 ]; then
+	echo "Usage : $0 file"
+elif [ $# -ne 1 ]; then
+	echo "Usage : $0, Only one factor is needed"
+elif [ $# -eq 1 ]; then		# 인자가 하나인 경우
+	if [ ! -e $1 ]; then	# 파일이 존재하지 않으면,
+		echo "The file does not exist."
+	else	# 파일이 존재하면,
+		if [ -d $1 ]; then	# 만약 디렉토리이면
+			echo "The argument of $0 must be a file"
+			exit 1
+		fi
+
+		echo "file case gogogo"
+
+	fi 
+fi
+

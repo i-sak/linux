@@ -1,0 +1,71 @@
+# 매크로를 사용한 Makefile
+
+CC	= gcc
+CFLAGS	= -Wall -Wextra
+TARGET	= cs1 cs2 cs3 cs4
+TARGET1	= cs1 
+TARGET2	= cs2
+TARGET3	= cs3
+TARGET4	= cs4
+
+all : $(TARGET)
+
+#
+$(TARGET1) : linux_system.o linux_program.o c_program.o main1.o
+	$(CC) -o $(TARGET1) linux_system.o linux_program.o c_program.o main1.o
+
+linux_system.o : linux_system.c
+	$(CC) $(CFLAGS) -c -o linux_system.o linux_system.c
+
+linux_program.o : linux_program.c
+	$(CC) $(CFLAGS) -c -o linux_program.o linux_program.c
+
+c_program.o : c_program.c
+	$(CC) $(CFLAGS) -c -o c_program.o c_program.c
+
+main1.o : main1.c
+	$(CC) $(CFLAGS) -c -o main1.o main1.c
+
+#
+$(TARGET2) : database.o software.o python.o main2.o
+	$(CC) -o $(TARGET2) database.o software.o python.o main2.o
+
+database.o : database.c
+	$(CC) $(CFLAGS) -c -o database.o database.c
+
+software.o : software.c
+	$(CC) $(CFLAGS) -c -o software.o software.c
+
+python.o : python.c
+	$(CC) $(CFLAGS) -c -o python.o python.c
+
+main2.o : main2.c
+	$(CC) $(CFLAGS) -c -o main2.o main2.c
+
+#
+$(TARGET3) : java_program.o web_program.o computer.o main3.o
+	$(CC) -o $(TARGET3) java_program.o web_program.o computer.o main3.o
+
+java_program.o : java_program.c
+	$(CC) $(CFLAGS) -c -o java_program.o java_program.c
+
+web_program.o : web_program.c
+	$(CC) $(CFLAGS) -c -o web_program.o web_program.c
+
+computer.o : computer.c
+	$(CC) $(CFLAGS) -c -o computer.o computer.c
+
+main3.o : main3.c
+	$(CC) $(CFLAGS) -c -o main3.o main3.c
+
+#
+$(TARGET4) : linux_program.o c_program.o web_program.o software.o python.o main4.o 
+	$(CC) -o $(TARGET4) linux_program.o c_program.o web_program.o software.o python.o main4.o
+
+
+clean :
+	rm -rf *.o $(TARGET) 	 # cs[1-4]
+
+
+
+

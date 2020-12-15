@@ -1,0 +1,68 @@
+#!/bin/bash
+# ================================================
+# 컴퓨터공학전공 2017E7441 김이삭
+# 확장자에 따른 선택적 응용 프로그램을 실행하는 쉘 스크립트
+# file Name : viewer.sh
+# Usage : ./viewer.sh directory
+# 	$# : number of arguments (인자의 수)
+#	$0 : 프로그램명
+#	$1~$9 : n번째 인자 
+#	! : not 
+# .c .mp3 .mp4 .odt .ods .pdf .png .jpg .txt
+# ================================================
+PS3="Your choice: "
+if [ $# -eq 0 ]; then # 인자가 없는 경우
+	echo "Usage : $0 directory"
+elif [ $# -ne 1 ]; then # 인자가 1개가 아닌 경우
+	echo "Usage : $0, Only one factor is needed"
+	echo "Usage : $0 directory"
+
+else			# 인자가 하나인 경우
+	if [ ! -d $1 ]; then	# directory가 존재하지 않으면,
+		echo "The directory does not exist."
+		exit 1
+	fi	# dir 존재하면,
+		
+	echo "실행하려고 하는 파일을 선택하세요. "
+	echo "q를 입력하면 종료됩니다."
+	select FILENAME in $1/*;
+	do
+		if [ $REPLY == "q" ]; then
+			break
+		fi
+		
+		arg=`basename $FILENAME`
+		FN="${arg%.*}"
+		fileExtension="${arg##*.}"
+			
+		echo $FILENAME $FN $fileExtension
+		# 확장자 검사, 확장자에 따른 프로그램 실행
+		# case
+		case $fileExtension in
+			c) vi $FILENAME
+				;;
+			txt) gedit $FILENAME &
+				;;
+			mp3) rhythmbox $FILENAME & 1>$2	
+				;;
+			mp4) vlc $FILENAME & 1>&2
+				;;
+			pdf) evince -f $FILENAME & 1>&2
+				;;
+			png) eog $FILENAME &
+				;;
+			jpg) eog $FILENAME &
+				;;
+			odt) libreoffice $FILENAME &
+				;;
+			ods) libreoffice $FILENAME &
+				;;	
+			java) gedit $FILENAME &
+				;;
+			*) echo "실행되는 확장자: *.c|*.mp3|*.mp4|*.odt|*.ods|*.pdf|*.png|*.jpg|*.txt"
+				exit 1
+		esac
+	done			
+fi 
+PS3=""
+exit 0
